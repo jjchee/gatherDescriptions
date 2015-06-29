@@ -9,13 +9,10 @@ Recommended Setup:
 Instructions:
 
 1. Login to MySQL, then create database:
-
    create database 'yt'
 2. Select the recently created database:
-
    use 'yt';
 3. Create the table:
-
    CREATE TABLE `yt_profiles` (`id` int(11) NOT NULL auto_increment,
        `userName` varchar(100) default NULL,
        `description` varchar(1000) default NULL,
