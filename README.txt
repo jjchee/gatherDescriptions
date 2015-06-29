@@ -17,7 +17,9 @@ Instructions:
        PRIMARY KEY  (`id`));
 4. Create profileNames.txt:
     Contains the list of targetted usernames, formatted with one username per line.
-5. Place connect.php and profileNames.txt in the same directory as this file
+5. Place connect.php, gatherDescriptions.php and profileNames.txt in the same directory
+7. cd to directory containing the above files and run gatherDescriptions.php:
+    php gatherDescriptions.php
 6. Enter the following command into MySQL:
     SELECT description FROM yt_profiles INTO OUTFILE '/tmp/profiles.txt';
 7. cd to /tmp/ and enter the following into the command line to extract email addresses:
