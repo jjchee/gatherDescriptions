@@ -3,6 +3,7 @@ Store YouTube channel descriptions in MySQL
 
 Recommended Setup:
 5.6.25 MySQL Community Server
+
 PHP Version 5.5.14
 
 Instructions:
