@@ -15,7 +15,8 @@ Instructions:
        `userName` varchar(100) default NULL,
        `description` varchar(1000) default NULL,
        PRIMARY KEY  (`id`));
-4. Create profileNames.txt which contains the list of targetted usernames, formatted with one username per line.
+4. Create profileNames.txt:
+    Contains the list of targetted usernames, formatted with one username per line.
 5. Place connect.php and profileNames.txt in the same directory as this file
 
 To extract emails from the Profiles:
