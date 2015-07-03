@@ -69,6 +69,7 @@
 		    {
 			array_push($userArray, $relatedUser);
 			$found = TRUE;
+			//deallocate unused variables to save memory
 			unset($url);
 			unset($json);
 			unset($result);
