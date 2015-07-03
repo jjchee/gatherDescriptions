@@ -1,8 +1,8 @@
 # gatherDescriptions
 This crawler will recursively search through related YouTube videos from a supplied seed.
-The crawler is implemented using the YouTube v3 Data API, PHP and MySQL. I am filtering for
-users with a subscriber count between 1k-100k, then storing their profiles in MySQL.
-Using Unix command-line tools, I will extract email addresses from the data.
+I am filtering for users with a subscriber count between 1k-100k, then storing their profiles in MySQL.
+Post-processing, such as extracting email addresses, is done using Unix command-line tools.
+(Implemented with YouTube v3 Data API, PHP, MySQL)
 
 Recommended Setup:
 1. 5.6.25 MySQL Community Server
