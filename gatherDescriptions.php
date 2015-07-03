@@ -1,6 +1,6 @@
 <?php   
 	/*
-	 *Jason Chee 6/29/2015
+	 *Jason Chee 7/2/2015
 	 */
         $t = getdate();
         $date = date('Y-m-d', $t[0]);
@@ -84,7 +84,7 @@
 			unset($subCount);
 			unset($token);
 			unset($count);
-			
+			//recursion condition
 			if(count($userArray) < $searchLimit)
 			{
 			    addRelated($relatedUser, $relatedVid);
@@ -98,7 +98,7 @@
 			    //if no more related videos, start again at seed (will cause one duplicate)
 			    addRelated($seedID, $seedVid);
 			}
-			$url1 = $baseURL.$filter2.$relatedVid."&part=snippet&pageToken=" . $token . "&type=video&maxResults=50".$keyString;
+			$url1 = $baseURL.$filter2.$relatedVid."&part=snippet&pageToken=".$token."&type=video&maxResults=50".$keyString;
 			$json1 = file_get_contents($url1);
 			$result1 = json_decode($json1, true);
 		    }
