@@ -2,8 +2,8 @@
 	/*
 	 *Jason Chee 7/2/2015
 	 */
-        $t = getdate();
-        $date = date('Y-m-d', $t[0]);
+    $t = getdate();
+    $date = date('Y-m-d', $t[0]);
 	//base URL for YouTube API
 	$baseURL = "https://www.googleapis.com/youtube/v3/";
 	//snippet filter
@@ -18,8 +18,9 @@
 	$keyString = "&key=".$devKey;
 	
 	$searchLimit = 3000;
-	$seedVid = "cHi3NICopjE";
-	$seedID = "UC6wtWmyCNFW9fc_7v1biLnA";
+	//college humor
+	$seedVid = "qIRqNPUMB2g";
+	$seedID = "UCPDXXXJj9nax0fr0Wfc048g";
 	$userArray = array($seedID);
 	
 	require_once("connect.php");
@@ -28,10 +29,15 @@
 	function addRelated($relatedUser, $relatedVid)
 	{
 	    global $baseURL, $filter, $filter2, $filter3, $filter4, $devKey, $keyString,
-	        $searchLimit, $userArray, $mysqli, $ytProfilesTable;
+	        $searchLimit, $userArray, $mysqli, $ytProfilesTable, $seedVid, $seedID;
 	    //First, store  the desription of the user in mySql
 	    $url = $baseURL.$filter.$relatedUser.$keyString;
 	    $json = file_get_contents($url);
+	    if($json === false)
+	    {
+		echo 'bad input 1\r\n';
+		return;
+	    }
 	    $result = json_decode($json, true);
 	    $description = $result[items][0][snippet][description];
 	    //make string compatible with MySQL
@@ -47,6 +53,11 @@
 	    //then, search for related videos
 	    $url1 = $baseURL.$filter2.$relatedVid.$filter3.$keyString;
 	    $json1 = file_get_contents($url1);
+	    if($json1 === false)
+	    {
+		echo 'bad input 2\r\n';
+		return;
+	    }
 	    $result1 = json_decode($json1, true); //array of related videos details
 	    //navigate down related videos list
 	    $found = FALSE;
@@ -60,6 +71,11 @@
 		    
 		    $url2 = $baseURL.$filter4.$relatedUser.$keyString;
 		    $json2 = file_get_contents($url2);
+		    if($json2 === false)
+		    {
+			echo 'bad input 3\r\n';
+			return;
+		    }
 		    $result2 = json_decode($json2, true);
 		    
 		    $subCount = $result2[items][0][statistics][subscriberCount]; //get sub count
@@ -96,15 +112,22 @@
 			if($token == null)
 			{
 			    //if no more related videos, start again at seed (will cause one duplicate)
+			    echo "go back to seed\r\n";
 			    addRelated($seedID, $seedVid);
 			}
 			$url1 = $baseURL.$filter2.$relatedVid."&part=snippet&pageToken=".$token."&type=video&maxResults=50".$keyString;
 			$json1 = file_get_contents($url1);
+			if($json1 === false)
+			{
+			    echo 'bad input 4\r\n';
+			    return;
+			}
 			$result1 = json_decode($json1, true);
+			echo "go to next page\r\n";
 		    }
 		}
 	    }
 	}
-	var_dump($userArray);
+	//var_dump($userArray);
 	
 ?>
